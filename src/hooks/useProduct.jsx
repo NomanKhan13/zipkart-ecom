@@ -3,24 +3,32 @@ import * as productService from '../utils/products';
 
 const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [status, setStatus] = useState('idle');
+
+  const isLoading = status === 'loading';
+  const isSuccess = status === 'loaded';
+  const isError = status === 'error';
+
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchProductById = async () => {
+      setStatus('loading');
+      setError(null);
+      setProduct(null);
       try {
-        setIsLoading(true);
         const data = await productService.getProduct(productId);
-        setProduct({ ...data, isInCart: false });
+        setProduct(data);
       } catch (error) {
+        setStatus('error');
         setError(error.message);
       } finally {
-        setIsLoading(false);
+        setStatus('loaded');
       }
     };
-    fetchProduct();
+    fetchProductById();
   }, [productId]);
 
-  return { product, isLoading, error };
+  return {isLoading, isError, error, isSuccess, product};
 };
 
 export default useProduct;

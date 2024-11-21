@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-import ShopYourContainer from '../components/ShopYourContainer';
-import Button from '../components/Button';
+import ShopYourContainer from '../../components/ShopYourContainer';
+import Button from '../../components/Button';
+import Typography from '../../components/Typography';
 
 const ShopYourLife = () => {
   return (
     <ShopYourContainer>
-      <h2 className="text-2xl sm:text-3xl font-bold">
-        Elevate Your Daily Routine
-      </h2>
+      <Typography variant="h2" weight="font-bold" color="text-white">Elevate Your Daily Routine</Typography>
       <p className="lg:w-1/2 font-medium text-gray-200 sm:text-md sm:text-center leading-relaxed">
         Discover products designed to bring ease and enjoyment to your everyday.
         From skincare essentials to productivity tools, these items make

@@ -7,6 +7,7 @@ const CurrencyProvider = ({ children }) => {
   const [converter, setConverter] = useState(84);
 
   const handleCurrencyChange = (newCurrency) => {
+    console.log("here");
     setCurrency(newCurrency);
     switch (newCurrency) {
       case '$':

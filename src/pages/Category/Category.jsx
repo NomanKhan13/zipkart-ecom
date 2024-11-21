@@ -1,18 +1,11 @@
 import { X } from 'lucide-react';
 import ProductsGrid from './ProductsGrid';
 import { useParams } from 'react-router-dom';
-import { CATEGORY_DATA } from '../../utils/CONSTANTS';
+import { CATEGORY_DATA, SORT_OPTIONS } from '../../utils/CONSTANTS';
 import { useEffect } from 'react';
+import Typography from '../../components/Typography';
 
-const SORT_OPTIONS = [
-  'Most Popular',
-  'Best Rating',
-  'Newest',
-  'Price: Low to High',
-  'Price: High to Low',
-];
-
-const Fashion = () => {
+const Category = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -30,12 +23,12 @@ const Fashion = () => {
       <div className="w-full max-w-7xl px-4 md:px-8">
         {/* Head */}
         <div className="py-12 flex flex-col gap-2">
-          <h2 className="text-3xl font-semibold">{heading}</h2>
-          <p className="text-slate-500">{subHeading}</p>
+          <Typography variant="h2" weight="font-semibold" color="text-slate-900">{heading}</Typography>
+          <p className="text-slate-500 leading-relaxed">{subHeading}</p>
         </div>
 
         {/* Sort & Filter */}
-        <div className="flex gap-4 items-center py-4">
+        {/* <div className="flex gap-4 items-center py-4">
           <select
             name="sort"
             id="sort"
@@ -58,10 +51,10 @@ const Fashion = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         {/* Filters Applied */}
-        <div className="flex items-center bg-gray-100 p-3 rounded-lg mb-8">
+        {/* <div className="flex items-center bg-gray-100 p-3 rounded-lg mb-8">
           <p className="text-gray-600 font-medium border-r pr-4 mr-4">
             Filters
           </p>
@@ -71,7 +64,7 @@ const Fashion = () => {
               <X className="text-gray-500 cursor-pointer" />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Products */}
         <ProductsGrid subCategories={subCategories} />
@@ -80,4 +73,4 @@ const Fashion = () => {
   );
 };
 
-export default Fashion;
+export default Category;

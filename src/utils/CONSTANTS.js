@@ -209,3 +209,60 @@ const allcats = [
 
   'sports-accessories',
 ];
+
+export const CATEGORY_STORE = [
+  { route: 'beauty', title: 'Beauty' },
+  { route: 'home-decoration', title: 'Home' },
+  { route: 'furniture', title: 'Furniture' },
+  { route: 'groceries', title: 'Groceries' },
+  { route: 'kitchen-accessories', title: 'Kitchen' },
+];
+
+export const COLLECTION_STORE = [
+  {
+    title: 'Gadgets & Gear',
+    description:
+      'Latest tech gadgets and accessories to keep you connected and entertained.',
+    subcategories: ['smartphones', 'tablets', 'mobile-accessories', 'laptops'],
+    img: '../../gadgets-collection.svg',
+    route: 'gadgets-gear',
+  },
+  {
+    title: 'Men’s Essentials',
+    description:
+      'Top picks in men’s fashion, shoes, and accessories for a complete look.',
+    subcategories: ['mens-shirts', 'mens-shoes', 'mens-watches', 'sunglasses'],
+    img: '../../mens-collection.svg',
+    route: 'mens-collection',
+  },
+  {
+    title: 'Women’s Must-Haves',
+    description:
+      'Stylish essentials from dresses to jewelry that every woman will love.',
+    subcategories: [
+      'womens-dresses',
+      'womens-bags',
+      'womens-shoes',
+      'womens-watches',
+      'womens-jewellery',
+    ],
+    img: '../../women-collection.svg',
+    route: 'womens-collection',
+  },
+  {
+    title: 'Home & Decor',
+    description:
+      'Home furnishings and decor items to enhance every room in style.',
+    subcategories: ['furniture', 'home-decoration', 'kitchen-accessories'],
+    img: '../../home-decor-collection.svg',
+    route: 'house-holds',
+  },
+];
+
+export const SORT_OPTIONS = [
+  'Most Popular',
+  'Best Rating',
+  'Newest',
+  'Price: Low to High',
+  'Price: High to Low',
+];

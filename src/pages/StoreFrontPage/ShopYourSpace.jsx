@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import ShopYourContainer from '../components/ShopYourContainer';
-import Button from '../components/Button';
+import ShopYourContainer from '../../components/ShopYourContainer';
+import Button from '../../components/Button';
+import Typography from '../../components/Typography';
 
 const ShopYourSpace = () => {
   return (
     <ShopYourContainer>
-      <h2 className="text-2xl sm:text-3xl font-bold">Set Up Your Space</h2>
+      <Typography variant="h2" weight="font-bold" color="text-white">Set Up Your Space</Typography>
       <p className="lg:w-1/2 font-medium text-gray-200 sm:text-md sm:text-center leading-relaxed">
         Create a cozy, functional, and stylish space with our home essentials
         and decor items. Perfect for your home office, living room, or kitchen –

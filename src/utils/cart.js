@@ -9,11 +9,20 @@ import {
 } from 'firebase/firestore';
 import { firestoreDB } from '../firebase';
 
+export const cartAddItemLocal = async (productInfo) => {
+    const localCart = JSON.parse(localStorage.getItem("cart"));
+    localCart.push(productInfo);
+    localStorage.setItem("cart", JSON.stringify(localCart));
+    return localCart;
+}
+
 export const cartAddItem = async (userId, productInfo) => {
   // get cart refrence
   // get cart snap - to know if it exists or not
   // if exist then run cartUpdateItem
   // else add the doc
+
+ 
 
   const cartRef = doc(firestoreDB, 'carts', userId);
   const cartSnap = await getDoc(cartRef);
@@ -42,6 +51,7 @@ export const cartAddItem = async (userId, productInfo) => {
     }
   }
 };
+
 export const cartUpdateItem = async (userId, productId, newQuantity) => {
   const cartRef = doc(firestoreDB, 'carts', userId);
   const cartSnap = await getDoc(cartRef);
@@ -57,6 +67,23 @@ export const cartUpdateItem = async (userId, productId, newQuantity) => {
     await updateDoc(cartRef, { items: updatedItems });
   }
 };
+export const cartUpdateItemLocal = async (productId, newQuantity) => {
+  const localCart = JSON.parse(localStorage.getItem("cart"));
+  const updatedCart = localCart.map(item => item.productId == productId ? {...item, quantity: newQuantity} : item);
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  return updatedCart;
+};
+
+export const cartRemoveItemLocal = (productId) => {
+  // get localstorage
+  // filter items with productId != given id
+  // update localstrogae
+
+  const localCart = JSON.parse(localStorage.getItem("cart"));
+  const updatedCart = localCart.filter(item => item.productId != productId);
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  return updatedCart;
+}
 
 export const cartRemoveItem = async (userId, productId) => {
   const cartRef = doc(firestoreDB, 'carts', userId);

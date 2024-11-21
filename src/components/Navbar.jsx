@@ -6,12 +6,17 @@ import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import { CurrencyContext } from '../contexts/CurrencyContext';
+import MobileMenu from './MobileMenu';
+import clsx from 'clsx';
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { handleCurrencyChange } = useContext(CurrencyContext);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+
+  const { handleCurrencyChange, currency } = useContext(CurrencyContext);
+  // console.log(handleCurrencyChange)
 
   const handleLogOut = async () => {
     try {
@@ -22,12 +27,13 @@ const Navbar = () => {
   };
 
   return (
-    <header>
+    <header className='relative' onMouseLeave={() => setIsModalOpen(false)}>
       <div className="bg-gradient-to-r from-[#2e3b4e] to-[#0d1b26] flex justify-center">
         <div className="w-full max-w-7xl px-4 md:px-8 py-2 flex items-center justify-between">
           <select
             name="currency"
             id="currency"
+            defaultValue={currency}
             className="text-white font-medium bg-primary outline-none rounded focus:ring-1 focus:ring-white"
             onChange={(e) => handleCurrencyChange(e.target.value)}
           >
@@ -66,12 +72,19 @@ const Navbar = () => {
         </div>
       </div>
 
-      <nav className="flex justify-center border-b">
+      <nav className="flex justify-center border-b border-slate-300">
         <div className="w-full max-w-7xl px-4 md:px-8 py-2 flex items-center justify-between">
           {/* show on less than lg */}
-          <div className="flex lg:hidden gap-2">
+          <div className="flex lg:hidden items-center gap-2">
+            <button onClick={() => setOpenMobileMenu(true)}>
             <Menu />
-            <Search />
+            </button>
+            <Link to="/search">
+              <button className="transition h-10 p-2 hover:bg-gray-200 rounded-full">
+                <Search />
+                {/* <span className="font-medium">Cart</span> */}
+              </button>
+            </Link>
           </div>
 
           {/* Logo - less than lg in middle and more than lg left */}
@@ -82,27 +95,29 @@ const Navbar = () => {
           {/* only show on larger than lg */}
           <ul className="hidden lg:flex gap-4">
             <li className="xl:text-lg">
-              <Link to="/store/fashion">Fashion</Link>
+              <Link to="/collection/fashion">Fashion</Link>
             </li>
             <li className="xl:text-lg">
-              <Link to="/store/electronics">Electronic</Link>
+              <Link to="/collection/electronics">Electronic</Link>
             </li>
             <li className="xl:text-lg">
-              <Link to="/store/house-holds">House holds</Link>
+              <Link to="/collection/house-holds">House holds</Link>
             </li>
             <li className="xl:text-lg">
-              <Link to="/store/personal-care">Personal care</Link>
+              <Link to="/collection/personal-care">Personal care</Link>
             </li>
           </ul>
 
           <div className="flex gap-1">
             {/* search */}
-            <button className="hidden lg:block text-sm p-1 transition h-10 p-2 hover:bg-gray-200 rounded-full">
-              <Search />
-              {/* <span className="font-medium">Cart</span> */}
-            </button>
+            <Link to="/search">
+              <button className="hidden lg:block text-sm p-1 transition h-10 p-2 hover:bg-gray-200 rounded-full">
+                <Search />
+                {/* <span className="font-medium">Cart</span> */}
+              </button>
+            </Link>
             {/* Profile Button */}
-            <button
+            {user && <button
               className="text-sm p-2 rounded-full transition relative h-10 hover:bg-gray-200 transition"
               onClick={() => setIsModalOpen((prevState) => !prevState)}
             >
@@ -121,7 +136,7 @@ const Navbar = () => {
                   </div>
                 </div>
               )}
-            </button>
+            </button>}
 
             {/* cart Button */}
             <Link
@@ -134,6 +149,13 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+
+      {/* mobile menu */}
+      {/* <div className={clsx('z-10 absolute top-0 left-0 h-screen w-screen bg-black/10 backdrop-blur-sm transition', openMobileMenu ? "h-screen w-screen" : "h-0 w-0")}>
+        <div className={clsx('w-full h-full max-w-md bg-white transition', openMobileMenu ? "translate-0" : " -translate-x-full")}>
+          <MobileMenu setOpenMobileMenu={setOpenMobileMenu} />
+        </div>
+      </div> */}
     </header>
   );
 };
