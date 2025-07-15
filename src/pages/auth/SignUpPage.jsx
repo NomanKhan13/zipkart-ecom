@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
-  
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -43,14 +43,16 @@ const SignUpPage = () => {
         displayName: authInfo.displayName,
       });
       // Force reload to ensure updates are reflected
-    await auth.currentUser.reload();
-    const updatedUser = auth.currentUser;
+      await auth.currentUser.reload();
+      const updatedUser = auth.currentUser;
 
-    // Log for debugging
-    console.log("Updated user after reload:", updatedUser);
+      // Log for debugging
+      console.log("Updated user after reload:", updatedUser);
 
-    setUser(updatedUser);
-    navigate('/');
+      setUser(updatedUser);
+      navigate('/');
+      sessionStorage.setItem('reloaded', 'true');
+      window.location.reload();
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Email is already in use');
@@ -83,9 +85,8 @@ const SignUpPage = () => {
 
         <button
           type="submit"
-          className={`w-full bg-primary py-2 rounded-md shadow-md font-semibold text-sm text-white hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
-            isFormSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
+          className={`w-full bg-primary py-2 rounded-md shadow-md font-semibold text-sm text-white hover:brightness-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isFormSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           disabled={isFormSubmitting}
         >
           {isFormSubmitting ? 'Signing up...' : 'Sign up'}
@@ -95,7 +96,7 @@ const SignUpPage = () => {
       <p className="text-center text-sm text-gray-500">
         Already have an account?{' '}
         <Link
-          to="/"
+          to="/sign-in"
           className="font-semibold leading-6 text-primary hover:brightness-125 cursor-pointer"
         >
           Sign In

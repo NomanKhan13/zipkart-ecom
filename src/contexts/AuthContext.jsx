@@ -14,6 +14,10 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       // console.log('Auth state changed:', currentUser); // Debugging
       setIsLoading(false);
+      // Clear reload flag after reload has happened
+    if (sessionStorage.getItem('reloaded')) {
+      sessionStorage.removeItem('reloaded');
+    }
     });
 
     return () => unsubscribe();
