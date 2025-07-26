@@ -27,137 +27,122 @@ const Navbar = () => {
   };
 
   return (
-    <header className='relative' onMouseLeave={() => setIsModalOpen(false)}>
-      <div className="bg-gradient-to-r from-[#2e3b4e] to-[#0d1b26] flex justify-center">
-        <div className="w-full max-w-7xl px-4 md:px-8 py-2 flex items-center justify-between">
-          <select
-            name="currency"
-            id="currency"
-            defaultValue={currency}
-            className="text-white font-medium bg-primary outline-none rounded focus:ring-1 focus:ring-white"
-            onChange={(e) => handleCurrencyChange(e.target.value)}
-          >
-            <option value="₹" className="bg-white text-gray-800">
-              INR
-            </option>
-            <option value="CA$" className="bg-white text-gray-800">
-              CND
-            </option>
-            <option value="€" className="bg-white text-gray-800">
-              EUR
-            </option>
-            <option value="$" className="bg-white text-gray-800">
-              USD
-            </option>
-          </select>
-          <div className="flex items-center gap-6">
-            {user?.displayName ? (
-              <p className="text-white font-medium text-md">
-                Welcome{' '}
-                <span className="font-medium">
-                  {user?.displayName || 'User'}
-                </span>
-              </p>
-            ) : (
-              <>
-                <Link to="/sign-in" className="text-white font-medium text-md">
-                  Sign in
-                </Link>
-                <Link to="/sign-up" className="text-white font-medium text-md">
-                  Create an account
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
+  <header className="bg-gradient-to-r from-[#2e3b4e] to-[#0d1b26] text-white font-mont">
+    <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
+      {/* Left: Logo + Nav */}
+      <div className="flex items-center gap-6">
+        {/* Mobile menu button */}
+        <button onClick={() => setOpenMobileMenu(true)} className="lg:hidden">
+          <Menu />
+        </button>
+
+        {/* Logo */}
+        <Link to="/store" className="text-xl md:text-2xl font-bold text-accent">
+          <Logo size="text-xl md:text-2xl" />
+        </Link>
+
+        {/* Nav links */}
+        <ul className="hidden lg:flex gap-4 text-sm md:text-base">
+          <li>
+            <Link to="/collection/fashion" className="hover:text-accent">
+              Fashion
+            </Link>
+          </li>
+          <li>
+            <Link to="/collection/electronics" className="hover:text-accent">
+              Electronics
+            </Link>
+          </li>
+          <li>
+            <Link to="/collection/house-holds" className="hover:text-accent">
+              Households
+            </Link>
+          </li>
+          <li>
+            <Link to="/collection/personal-care" className="hover:text-accent">
+              Personal Care
+            </Link>
+          </li>
+        </ul>
       </div>
 
-      <nav className="flex justify-center border-b border-slate-300">
-        <div className="w-full max-w-7xl px-4 md:px-8 py-2 flex items-center justify-between">
-          {/* show on less than lg */}
-          <div className="flex lg:hidden items-center gap-2">
-            <button onClick={() => setOpenMobileMenu(true)}>
-            <Menu />
-            </button>
-            <Link to="/search">
-              <button className="transition h-10 p-2 hover:bg-gray-200 rounded-full">
-                <Search />
-                {/* <span className="font-medium">Cart</span> */}
-              </button>
-            </Link>
-          </div>
+      {/* Right: Search, Cart, Auth/Profile */}
+      <div className="flex items-center gap-4">
+        {/* Currency dropdown */}
+        <select
+          name="currency"
+          defaultValue={currency}
+          className="bg-transparent border border-white rounded px-2 py-1 text-sm outline-none hover:border-accent"
+          onChange={(e) => handleCurrencyChange(e.target.value)}
+        >
+          <option value="₹" className="text-black">
+            INR
+          </option>
+          <option value="CA$" className="text-black">
+            CND
+          </option>
+          <option value="€" className="text-black">
+            EUR
+          </option>
+          <option value="$" className="text-black">
+            USD
+          </option>
+        </select>
 
-          {/* Logo - less than lg in middle and more than lg left */}
-          <Link to="/store" className="text-2xl font-bold text-accent">
-            <Logo size="text-2xl lg:text-3xl" />
-          </Link>
+        {/* Search Icon */}
+        <Link to="/search">
+          <button className="hover:bg-white/10 p-2 rounded-full transition">
+            <Search />
+          </button>
+        </Link>
 
-          {/* only show on larger than lg */}
-          <ul className="hidden lg:flex gap-4">
-            <li className="xl:text-lg">
-              <Link to="/collection/fashion">Fashion</Link>
-            </li>
-            <li className="xl:text-lg">
-              <Link to="/collection/electronics">Electronic</Link>
-            </li>
-            <li className="xl:text-lg">
-              <Link to="/collection/house-holds">House holds</Link>
-            </li>
-            <li className="xl:text-lg">
-              <Link to="/collection/personal-care">Personal care</Link>
-            </li>
-          </ul>
+        {/* Cart Icon */}
+        <Link to="/cart">
+          <button className="hover:bg-white/10 p-2 rounded-full transition">
+            <ShoppingCart />
+          </button>
+        </Link>
 
-          <div className="flex gap-1">
-            {/* search */}
-            <Link to="/search">
-              <button className="hidden lg:block text-sm p-1 transition h-10 p-2 hover:bg-gray-200 rounded-full">
-                <Search />
-                {/* <span className="font-medium">Cart</span> */}
-              </button>
-            </Link>
-            {/* Profile Button */}
-            {user && <button
-              className="text-sm p-2 rounded-full transition relative h-10 hover:bg-gray-200 transition"
-              onClick={() => setIsModalOpen((prevState) => !prevState)}
+        {/* Auth / Profile */}
+        {user ? (
+          <div className="relative">
+            <button
+              onClick={() => setIsModalOpen((prev) => !prev)}
+              className="hover:bg-white/10 p-2 rounded-full transition"
             >
               <UserRound />
-              {/* <span className="font-medium">{user?.displayName || 'User'}</span> */}
+            </button>
 
-              {/* Dropdown Menu */}
-              {isModalOpen && (
-                <div
-                  className="absolute right-0 -bottom-14 w-32 bg-white text-secondary rounded-lg shadow-lg z-10 p-4 border"
+            {/* Dropdown */}
+            {isModalOpen && (
+              <div className="absolute right-0 mt-2 w-36 bg-white text-gray-800 rounded shadow-lg py-2 z-20">
+                <button
                   onClick={handleLogOut}
+                  className="flex items-center gap-2 w-full px-4 py-2 hover:bg-gray-100"
                 >
-                  <div className="flex items-center gap-1 cursor-pointer hover:text-primary">
-                    <LogOut size={18} />
-                    <span className="font-semibold">Sign Out</span>
-                  </div>
-                </div>
-              )}
-            </button>}
-
-            {/* cart Button */}
-            <Link
-              to="/cart"
-              className="text-sm p-1 transition h-10 p-2 hover:bg-gray-200 rounded-full"
-            >
-              <ShoppingCart />
-              {/* <span className="font-medium">Cart</span> */}
-            </Link>
+                  <LogOut size={16} />
+                  <span className="text-sm font-semibold">Sign Out</span>
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-      </nav>
+        ) : (
+          <>
+            <Link to="/sign-in" className="text-sm hover:underline">
+              Sign in
+            </Link>
+            <Link to="/sign-up" className="text-sm hover:underline">
+              Create Account
+            </Link>
+          </>
+        )}
+      </div>
+    </div>
 
-      {/* mobile menu */}
-      {/* <div className={clsx('z-10 absolute top-0 left-0 h-screen w-screen bg-black/10 backdrop-blur-sm transition', openMobileMenu ? "h-screen w-screen" : "h-0 w-0")}>
-        <div className={clsx('w-full h-full max-w-md bg-white transition', openMobileMenu ? "translate-0" : " -translate-x-full")}>
-          <MobileMenu setOpenMobileMenu={setOpenMobileMenu} />
-        </div>
-      </div> */}
-    </header>
-  );
+    {/* Mobile menu panel (currently commented) */}
+    {/* ... MobileMenu as before ... */}
+  </header>
+);
 };
 
 export default Navbar;
