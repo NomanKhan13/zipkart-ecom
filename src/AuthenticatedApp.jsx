@@ -12,6 +12,8 @@ import ZipKartStyleGuide from './pages/ZipKartStyleGuide';
 import Category from './pages/Category/Category';
 import CurrencyProvider from './contexts/CurrencyContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 import ProductDetailPage from './pages/ProductDetail/ProductDetailPage';
 import { useContext } from 'react';
 import { AuthContext } from './contexts/AuthContext';
@@ -23,6 +25,7 @@ const Layout = () => {
     <>
       <Navbar />
       <Outlet />
+      <Footer />
     </>
   );
 };

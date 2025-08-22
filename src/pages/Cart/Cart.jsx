@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { CartContext } from '../../contexts/CartContext';
 import CartItem from './CartItem';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
@@ -10,12 +10,8 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
-  
-  // const [quantity, setQuantity] = useState(cart?.item?.quantity || 1);
-  const [quantity, setQuantity] = useState(1);
   const { currency, converter } = useContext(CurrencyContext);
 
-  // only change when cart changes that's why memorized
   const subTotal = useMemo(() => {
     return cart?.items?.reduce((acc, item) => acc + item.price * item.quantity, 0) || 0;
   }, [cart?.items]);
@@ -28,52 +24,67 @@ const Cart = () => {
   const removeProduct = useMemo(() => {
     return cart?.items?.map(item => item.productId) || [];
   }, [cart?.items]);
-    
-
-  const cartItems = cart?.items?.map(item => <CartItem key={item.productId} item={item} currency={currency} converter={converter} />);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
-  if (!cart?.items) {
-    return <CartShimmer />
-  }
-
-  
-  if (cart?.items.length == 0) {
-    return <EmptyCart />
-  }
+  if (!cart?.items) return <CartShimmer />;
+  if (cart.items.length === 0) return <EmptyCart />;
 
   return (
     <div className="flex flex-col justify-center py-12 px-4 md:px-8">
-      <div className="w-full max-w-7xl flex flex-col items-center">
-
-        <h2 className="text-3xl md:text-4xl mb-8 font-semibold text-center text-slate-800">
+      <div className="w-full max-w-5xl mx-auto">
+        
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-semibold text-center text-zinc-900 mb-10">
           Shopping Cart
         </h2>
 
-        {cartItems}
+        {/* Items */}
+        <div className="space-y-6">
+          {cart.items.map(item => (
+            <CartItem 
+              key={item.productId} 
+              item={item} 
+              currency={currency} 
+              converter={converter} 
+            />
+          ))}
+        </div>
 
-        <div className='py-8 border-t border-slate-300 w-full max-w-2xl'>
-          <div className='flex items-center justify-between mb-2'>
-            <p className='font-semibold text-xl text-slate-900'>
-              Subtotal
-            </p>
-            <p className='font-semibold text-2xl text-slate-900'>
+        {/* Subtotal & Checkout */}
+        <div className="mt-10 border-t border-zinc-300 pt-6 max-w-2xl mx-auto">
+          <div className="flex items-center justify-between mb-2">
+            <p className="font-semibold text-xl text-zinc-900">Subtotal</p>
+            <p className="font-semibold text-2xl text-zinc-900">
               {currency}{(subTotal * converter).toLocaleString()}
             </p>
           </div>
-          <div className='text-sm text-slate-500 mt-2'>
+          <p className="text-sm text-zinc-500 mb-6">
             Shipping and taxes will be calculated at checkout.
-          </div>
-        </div>
+          </p>
 
-        <Link to="/checkout"><Button btnText="checkout" btnType="filled" className="w-full max-w-2xl" /></Link>
+          <Link to="/checkout">
+            <Button 
+              btnText="Proceed to Checkout" 
+              btnType="filled" 
+              className="w-full max-w-2xl" 
+            />
+          </Link>
+        </div>
       </div>
-      <div className='mt-20'>
-        <h3 className='text-slate-900 text-xl py-4 font-medium'>You may also like...</h3>
-        <ProductsGrid isForCart={true} subCategories={subCategories} removeProduct={removeProduct}/>
+
+      {/* Recommendations */}
+      <div className="mt-20 max-w-7xl mx-auto">
+        <h3 className="text-zinc-900 text-xl md:text-2xl font-medium mb-6">
+          You may also like
+        </h3>
+        <ProductsGrid 
+          isForCart={true} 
+          subCategories={subCategories} 
+          removeProduct={removeProduct} 
+        />
       </div>
     </div>
   );

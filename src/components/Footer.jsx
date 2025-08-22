@@ -1,62 +1,65 @@
-const FOOTER_ITEMS = [
-  'Beauty',
-  'Fragrances',
-  'Furniture',
-  'Groceries',
-  'Home decoration',
-  'Kitchen Accessories',
-  'Laptops',
-  'Mens Shirts',
-  'Mens Shoes',
-  'mens Watches',
-  'Mobile Accessories',
-  'Motorcycle',
-  'Skin care',
-  'Smartphones',
-  'Sports Accessories',
-  'Sunglasses',
-  'Tablets',
-  'Tops',
-  'Vehicle',
-  'Womens Bags',
-  'Womens Dresses',
-  'Womens Jewellery',
-  'Womens Shoes',
-  'Womens Watches',
-];
+import { Link } from "react-router-dom";
+import { Facebook, Instagram, Twitter } from "lucide-react";
+import Typography from "./Typography";
 
 const Footer = () => {
   return (
-    <div className="flex justify-center bg-gradient-to-r from-[#2e3b4e] to-[#0d1b26] py-16 mt-16">
-      <div className="w-full max-w-7xl px-4 md:px-8 mt-12 flex gap-8 flex-col xl:flex-row">
-        {/* Grid layout for footer items */}
-        <div className="flex-1 grid gap-4 grid-cols-2 md:grid-cols-4 text-gray-300">
-          {FOOTER_ITEMS.map((item) => (
-            <p key={item} className="p-2">
-              {item}
+    <footer className="bg-zinc-900 text-zinc-400">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
+        {/* Top: Brand + Nav */}
+        <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
+          {/* Brand */}
+          <div className="flex flex-col gap-3 md:w-1/3">
+            <Typography variant="h4" weight="font-bold" color="text-white">
+              ShopSage
+            </Typography>
+            <p className="text-sm leading-relaxed">
+              Curated collections to elevate your lifestyle. Thoughtfully designed for beauty, utility, and everyday ease.
             </p>
-          ))}
-        </div>
+          </div>
 
-        {/* Newsletter signup section */}
-        <div className="flex flex-col gap-4">
-          <p className="text-white text-lg">Sign up for our newsletter</p>
-          <p className="text-gray-200">
-            The latest deals and savings, sent to your inbox weekly.
-          </p>
-          <div className="flex gap-4 mt-3">
-            <input
-              type="email"
-              placeholder="jane@gmail.com"
-              className="py-2 px-3 rounded-md xl:flex-1"
-            />
-            <button className="bg-[#74b5ff] px-6 py-3 rounded-md text-slate-800 font-medium">
-              Sign up
-            </button>
+          {/* Links */}
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
+            <div>
+              <h4 className="text-sm font-semibold text-zinc-200 mb-3">
+                Shop
+              </h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/collections" className="hover:text-white">All Collections</Link></li>
+                <li><Link to="/collection/shop-your-space" className="hover:text-white">Shop Your Space</Link></li>
+                <li><Link to="/collection/shop-your-lifestyle" className="hover:text-white">Shop Your Life</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-zinc-200 mb-3">
+                Company
+              </h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/about" className="hover:text-white">About Us</Link></li>
+                <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+                <li><Link to="/faq" className="hover:text-white">FAQs</Link></li>
+              </ul>
+            </div>
           </div>
         </div>
+
+        {/* Divider */}
+        <div className="border-t border-zinc-800 my-8" />
+
+        {/* Bottom: Social + Copyright */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex gap-4">
+            <a href="#" className="hover:text-white"><Facebook size={18} /></a>
+            <a href="#" className="hover:text-white"><Instagram size={18} /></a>
+            <a href="#" className="hover:text-white"><Twitter size={18} /></a>
+          </div>
+          <p className="text-xs text-zinc-500">
+            © {new Date().getFullYear()} ShopSage. All rights reserved.
+          </p>
+        </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

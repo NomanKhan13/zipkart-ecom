@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   @apply bg-gradient-to-r from-[#d9e4eb] to-[#f1f7fb];
-}
+} */
 
 .bg-gray-gradient {
   @apply bg-gradient-to-t from-[#bcd4f7] to-[#eaf4ff]

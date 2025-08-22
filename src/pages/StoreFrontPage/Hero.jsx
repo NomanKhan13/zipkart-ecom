@@ -1,22 +1,38 @@
-import { Link } from 'react-router-dom';
-import Button from '../../components/Button';
-import Typography from '../../components/Typography';
+import { Link } from "react-router-dom";
+import Button from "../../components/Button";
+import Typography from "../../components/Typography";
 
 const Hero = () => {
   return (
-    <div className="flex justify-center items-center font-mont px-4 py-40 md:px-8 bg-gradient-to-r from-[#3a6073] to-[#3a7bd5]">
-      <div className="w-full max-w-7xl flex flex-col sm:items-center gap-6 sm:text-center">
-        <Typography variant="h1" weight="font-semibold" color="text-white">Fresh Finds for You</Typography>
-        <p className="text-md md:text-lg text-gray-200 w-full max-w-2xl leading-relaxed">
-          The latest picks curated just for you! Explore new styles, fresh
-          releases, and trending items. These are bound to add a spark to your
-          wardrobe, home, and lifestyle.
+    <section className="bg-zinc-100">
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-28 flex flex-col items-center text-center gap-6">
+        
+        {/* Headline */}
+        <Typography
+          variant="h1"
+          weight="font-bold"
+          className="text-3xl md:text-5xl leading-tight tracking-tight text-zinc-900"
+        >
+          Fresh Finds for You
+        </Typography>
+
+        {/* Subtitle */}
+        <p className="text-base md:text-lg text-zinc-600 max-w-2xl leading-relaxed">
+          Explore the latest picks curated just for you! From trending fashion
+          to lifestyle essentials, discover products that bring freshness and
+          style to your everyday life.
         </p>
+
+        {/* CTA Button */}
         <Link to="/collection/shop-fresh-finds">
-          <Button btnText="Shop Fresh Finds" btnType="filled" />
+          <Button
+            btnText="Shop Fresh Finds"
+            btnType="filled"
+            className="mt-4 px-6 py-3 text-lg rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition bg-gradient-to-r from-[#3a6073] to-[#3a7bd5] text-white"
+          />
         </Link>
       </div>
-    </div>
+    </section>
   );
 };
 

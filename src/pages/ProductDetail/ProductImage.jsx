@@ -1,34 +1,83 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ProductImage = ({ product }) => {
-
+  const images = product?.images || (product?.thumbnail ? [product.thumbnail] : []);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-    return (
-      <div className="flex-1 space-y-4">
-        <div className={clsx("w-full overflow-hidden rounded-lg border border-slate-400 shadow", imageLoaded ? "bg-gray-gradient" : "h-[500px] bg-[url('https://via.placeholder.com/500/')] bg-cover bg-center")}>
+  // Reset loader when product or image changes
+  useEffect(() => {
+    setActiveIndex(0);
+    setImageLoaded(false);
+  }, [product?.id]);
+
+  const onThumbClick = (idx) => {
+    if (idx === activeIndex) return;
+    setActiveIndex(idx);
+    setImageLoaded(false);
+  };
+
+  const activeSrc = images[activeIndex];
+
+  return (
+    <div className="flex-1 space-y-4">
+      {/* Main image */}
+      <div
+        className={clsx(
+          "relative w-full overflow-hidden rounded-xl border border-zinc-300 shadow-sm",
+          "bg-zinc-50 h-[420px] sm:h-[520px]"
+        )}
+        aria-busy={!imageLoaded}
+      >
+        {!imageLoaded && (
+          <div className="absolute inset-0 animate-pulse bg-zinc-200" />
+        )}
+        {activeSrc ? (
           <img
-            src={product.images[0]}
-            className={clsx("w-full h-full object-cover", imageLoaded ? "opacity-100" : "opacity-0")}
+            src={activeSrc}
             alt={product.title}
+            className={clsx(
+              "w-full h-full object-contain transition-opacity duration-500",
+              imageLoaded ? "opacity-100" : "opacity-0"
+            )}
             onLoad={() => setImageLoaded(true)}
           />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-zinc-400">
+            No image available
+          </div>
+        )}
+      </div>
 
-        </div>
+      {/* Thumbnails */}
+      {!!images.length && (
         <div className="flex gap-2 flex-wrap">
-          {/* Thumbnail Images */}
-          {product?.images?.map((image, idx) => (
-            <div
+          {images.map((src, idx) => (
+            <button
               key={idx}
-              className="h-24 w-24 border-2 rounded-md overflow-hidden border-gray-300"
+              type="button"
+              onClick={() => onThumbClick(idx)}
+              className={clsx(
+                "h-20 w-20 rounded-md overflow-hidden border transition transform",
+                idx === activeIndex
+                  ? "border-zinc-900"
+                  : "border-zinc-200 hover:border-zinc-400 hover:scale-[1.02]"
+              )}
+              aria-label={`Show image ${idx + 1}`}
+              aria-pressed={idx === activeIndex}
             >
-              <img src={image} alt={`image${idx}`} className="w-full h-full" />
-            </div>
+              <img
+                src={src}
+                alt={`${product.title} thumbnail ${idx + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </button>
           ))}
         </div>
-      </div>
-    );
-  };
-  
-  export default ProductImage;
+      )}
+    </div>
+  );
+};
+
+export default ProductImage;
