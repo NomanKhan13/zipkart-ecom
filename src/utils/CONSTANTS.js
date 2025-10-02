@@ -249,14 +249,14 @@ export const COLLECTION_STORE = [
     img: '../../women-collection.svg',
     route: 'womens-collection',
   },
-  {
-    title: 'Home & Decor',
-    description:
-      'Home furnishings and decor items to enhance every room in style.',
-    subcategories: ['furniture', 'home-decoration', 'kitchen-accessories'],
-    img: '../../home-decor-collection.svg',
-    route: 'house-holds',
-  },
+  // {
+  //   title: 'Home & Decor',
+  //   description:
+  //     'Home furnishings and decor items to enhance every room in style.',
+  //   subcategories: ['furniture', 'home-decoration', 'kitchen-accessories'],
+  //   img: '../../home-decor-collection.svg',
+  //   route: 'house-holds',
+  // },
 ];
 
 export const SORT_OPTIONS = [

@@ -2,19 +2,21 @@ import { Link } from 'react-router-dom';
 
 const CollectionCard = ({ collection }) => {
   return (
-    <Link to={`/collection/${collection.route}`}>
-      <div className="bg-white rounded-2xl border border-zinc-200 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 duration-300 overflow-hidden">
-        <div className="h-72 w-full">
-          <img src={collection.img} className="h-full w-full object-cover" />
-        </div>
-      </div>
-      <p className="text-[#2d334a] text-lg font-semibold mt-3">
-        {collection.title}
-      </p>
-      <p className="text-zinc-600 text-sm">
-        {collection.description}
-      </p>
-    </Link>
+      
+      <div key={collection.title} className="group relative">
+                <img
+                  alt={collection.title}
+                  src={collection.img}
+                  className="w-full rounded-lg bg-white group-hover:opacity-75 max-sm:h-80 sm:aspect-2/1 lg:aspect-square"
+                />
+                <h3 className="mt-6 text-sm text-gray-500">
+                <Link to={`/collection/${collection.route}`}>
+                    <span className="absolute inset-0" />
+                    {collection.title}
+                  </Link>
+                </h3>
+                <p className="text-base font-semibold text-gray-900">{collection.description}</p>
+              </div>
   );
 }
 

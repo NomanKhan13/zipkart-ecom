@@ -7,8 +7,8 @@ import Navbar from "../../components/Navbar";
 const ShopYourSpace = () => {
   return (
     <section
-      className="relative z-10 overflow-hidden bg-gradient-to-br from-[#fffffe] via-[#f0f4ff] to-[#e4ebf5] h-[95vh] z-10 -mt-[6rem]"
-      style={{ clipPath: "polygon(0 10vh, 100% 0, 100% 75vh, 0 100%)" }}
+      className="relative z-10 overflow-hidden bg-gradient-to-br from-[#fffffe] via-[#f0f4ff] to-[#e4ebf5] z-10 -mt-[6rem] -skew-y-6"
+      
     >
 
       {/* Decorative Blobs */}
@@ -16,7 +16,7 @@ const ShopYourSpace = () => {
       <div className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-[#bae8e8] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
 
       {/* Hero Content */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 pt-40 pb-32 flex flex-col items-center text-center gap-8">
+      <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 pt-40 pb-32 flex flex-col items-center text-center gap-8 skew-y-6">
         {/* Headline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

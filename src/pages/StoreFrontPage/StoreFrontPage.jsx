@@ -12,8 +12,8 @@ const StoreFrontPage = () => {
       <TopRated/>
       <ShopYourSpace />
       <ShopByCategory />
-      <ShopByCollection />
       <ShopYourLife />
+      <ShopByCollection />
     </>
   );
 };
