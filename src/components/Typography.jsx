@@ -20,7 +20,7 @@ const Typography = ({ variant, children, weight, color }) => {
 
     if (variant == "h3") {
         return (
-            <h3 className={clsx("", weight, color)}>{children}</h3>
+            <h3 className={clsx("text-2xl md:text-3xl text-[#272343]", weight, color)}>{children}</h3>
         );
     }
 

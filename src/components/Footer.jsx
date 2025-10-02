@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (
@@ -13,7 +14,7 @@ const Footer = () => {
         {/* Brand / Logo */}
         <div className="flex flex-col gap-4">
           <Link to="/" className="text-2xl font-extrabold text-[#272343]">
-            ShopYourSpace
+           <Logo />
           </Link>
           <p className="text-sm text-[#2d334a] leading-relaxed">
             Discover fresh finds curated just for you. Fashion, lifestyle, and essentials — everything you need in one space.
@@ -61,7 +62,7 @@ const Footer = () => {
           <h4 className="font-semibold text-[#272343] mb-4">Get in Touch</h4>
           <ul className="flex flex-col gap-3 text-[#2d334a] text-sm">
             <li className="flex items-center gap-2">
-              <Mail size={16} /> support@shopyourspace.com
+              <Mail size={16} /> support@zipkart.com
             </li>
             <li className="flex items-center gap-2">
               <Phone size={16} /> +91 98765 43210
@@ -75,7 +76,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="relative border-t mt-12 pt-6 text-center text-sm text-[#2d334a]">
-        © {new Date().getFullYear()} ShopYourSpace. All rights reserved.
+        © {new Date().getFullYear()} ZipKart. All rights reserved.
       </div>
     </footer>
   );

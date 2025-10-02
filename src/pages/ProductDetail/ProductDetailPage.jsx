@@ -10,6 +10,7 @@ import ProductImage from './ProductImage';
 import ProductHighlight from './ProductHighlight';
 import ProductReview from './ProductReview';
 import ProductDetailShimmer from './ProductDetailShimmer';
+import Navbar from '../../components/Navbar';
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
@@ -39,7 +40,8 @@ const ProductDetailPage = () => {
   if (isSuccess)
     return (
       <div className="flex justify-center py-20 px-4 md:px-8">
-        <div className="w-full max-w-7xl">
+        <Navbar />
+        <div className="w-full max-w-7xl mt-12">
           <div className="flex flex-col lg:flex-row gap-12">
             {/* Heading (mobile) */}
             <div className="flex lg:hidden">

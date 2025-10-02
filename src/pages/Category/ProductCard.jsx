@@ -8,6 +8,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <Link to={`/products/${product.id}`}>
+      
       <div className="group cursor-pointer rounded-2xl bg-white border border-zinc-200 shadow-md transition-all duration-300 flex flex-col">
         <div className="h-60 sm:h-72 w-full overflow-hidden rounded-t-2xl bg-zinc-50">
           <img
@@ -18,13 +19,11 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="flex flex-col gap-1 p-4">
-          <Typography
-            variant="h3"
-            weight="font-semibold"
-            className="line-clamp-1 text-[#272343]"
-          >
+          
+          <h4 className="line-clamp-1 text-[#272343] text-xl">
+             
             {product.title}
-          </Typography>
+          </h4>
 
           <p className="text-zinc-600 text-sm line-clamp-2">{product.description}</p>
 

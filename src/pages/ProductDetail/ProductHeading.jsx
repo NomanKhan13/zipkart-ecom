@@ -11,7 +11,7 @@ const ProductHeading = ({ product }) => {
       <Typography variant="h2" weight="font-semibold" color="text-zinc-900">
         {product.title}
       </Typography>
-      <p className="text-lg lg:text-2xl font-semibold text-blue-600">
+      <p className="text-lg lg:text-2xl font-semibold text-[#272343]">
         {currency}{(product.price * converter).toLocaleString()}
       </p>
       <StarRatingView rating={product.rating} />

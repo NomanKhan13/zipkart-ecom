@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CATEGORY_DATA, SORT_OPTIONS } from '../../utils/CONSTANTS';
 import { useEffect } from 'react';
 import Typography from '../../components/Typography';
+import Navbar from '../../components/Navbar';
 
 const Category = () => {
   useEffect(() => {
@@ -19,11 +20,12 @@ const Category = () => {
   } = CATEGORY_DATA[category];
 
   return (
-    <div className="flex justify-center">
-      <div className="w-full max-w-7xl px-4 md:px-8">
+    <div className="flex justify-center relative z-10 overflow-hidden bg-gradient-to-br from-[#fffffe] via-[#f0f4ff] to-[#e4ebf5]">
+      <Navbar />
+      <div className="mt-16 w-full max-w-7xl px-4 md:px-8">
         {/* Head */}
         <div className="py-12 flex flex-col gap-2">
-          <Typography variant="h2" weight="font-semibold" color="text-slate-900">{heading}</Typography>
+          <Typography variant="h3" weight="font-semibold" color="text-slate-900">{heading}</Typography>
           <p className="text-slate-500 leading-relaxed">{subHeading}</p>
         </div>
 

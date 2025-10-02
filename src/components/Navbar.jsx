@@ -48,10 +48,10 @@ const Navbar = () => {
 
         {/* Nav Links (Desktop) */}
         <ul className="hidden lg:flex gap-8 font-medium text-[#2d334a]">
-          <li><Link className="hover:text-[#272343] transition" to="/collection/fashion">Fashion</Link></li>
-          <li><Link className="hover:text-[#272343] transition" to="/collection/electronics">Electronics</Link></li>
-          <li><Link className="hover:text-[#272343] transition" to="/collection/house-holds">Households</Link></li>
-          <li><Link className="hover:text-[#272343] transition" to="/collection/personal-care">Personal Care</Link></li>
+          <li className="text-[#272343] hover:text-[#ffd803]"><Link className="transition" to="/collection/fashion">Fashion</Link></li>
+          <li className="text-[#272343] hover:text-[#ffd803]"><Link className="transition" to="/collection/electronics">Electronics</Link></li>
+          <li className="text-[#272343] hover:text-[#ffd803]"><Link className="transition" to="/collection/house-holds">Households</Link></li>
+          <li className="text-[#272343] hover:text-[#ffd803]"><Link className="transition" to="/collection/personal-care">Personal Care</Link></li>
         </ul>
 
         {/* Right Actions */}

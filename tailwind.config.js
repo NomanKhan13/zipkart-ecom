@@ -9,7 +9,7 @@ export default {
         lobster: ['Lobster'],
       },
       colors: {
-        primary: '#4479f0',
+        primary: '#ffd803',
         background: '#F0F0F0',
         accent: '#34C759',
       },

@@ -7,6 +7,7 @@ import ProductsGrid from '../Category/ProductsGrid';
 import CartShimmer from './CartShimmer';
 import EmptyCart from './EmptyCart';
 import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
@@ -34,7 +35,8 @@ const Cart = () => {
 
   return (
     <div className="flex flex-col justify-center py-12 px-4 md:px-8">
-      <div className="w-full max-w-5xl mx-auto">
+      <Navbar />
+      <div className="w-full max-w-5xl mx-auto mt-16">
         
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl font-semibold text-center text-zinc-900 mb-10">

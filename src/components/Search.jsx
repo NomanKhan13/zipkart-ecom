@@ -64,8 +64,8 @@ const Search = () => {
                                 placeholder="Search..."
                                 className="w-full text-lg py-4 px-2 font-lato rounded-l-lg"
                             />
-                            <button className="rounded-r-lg p-4 bg-primary">
-                                <SearchIcon />
+                            <button className="rounded-r-lg p-4 bg-[#ffd803]">
+                                <SearchIcon color="#272343" />
                             </button>
                         </form>
 
