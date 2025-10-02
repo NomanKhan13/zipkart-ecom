@@ -63,7 +63,7 @@ const Checkout = () => {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState(null);
 
-  const subtotal = cart.items.reduce((s, it) => s + it.price * it.quantity, 0);
+  const subtotal = cart?.items.reduce((s, it) => s + it.price * it.quantity, 0);
   const shipping = subtotal >= 2000 ? 0 : 99;
   const tax = Math.round(subtotal * 0.05);
   const total = subtotal + shipping + tax;
@@ -113,7 +113,10 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#fbfdff]">
+    <div className="min-h-screen relative z-10 overflow-hidden bg-gradient-to-br from-[#fffffe] via-[#f0f4ff] to-[#e4ebf5]">
+      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-[#ffd803] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-[#bae8e8] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      
       {/* Page header */}
       <div className="bg-gradient-to-br from-[#fffffe] via-[#f0f4ff] to-[#e4ebf5] py-12">
         <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
@@ -327,13 +330,12 @@ const Checkout = () => {
 
               {/* Place order CTA */}
               <div className="flex justify-end">
-                <Button
-                  btnText={processing ? "Processing..." : "Place order"}
-                  btnType="filled"
+                <button
+                  
                   className="px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all bg-[#272343] text-white"
                   onClick={placeOrder}
                   disabled={processing}
-                />
+                >{processing ? "Processing..." : "Place order"}</button>
               </div>
             </form>
           </div>
@@ -346,11 +348,11 @@ const Checkout = () => {
                   <p variant="h4" weight="font-semibold" className="text-[#272343]">Order Summary</p>
                   <p className="text-xs text-zinc-500 mt-1">Items will be shipped to the address provided</p>
                 </div>
-                <div className="text-sm text-zinc-500">{cart.items.length} items</div>
+                <div className="text-sm text-zinc-500">{cart?.items.length} items</div>
               </div>
 
               <div className="space-y-4">
-                {cart.items.map((it) => (
+                {cart?.items.map((it) => (
                   <OrderItem key={it.id} item={it} />
                 ))}
               </div>
