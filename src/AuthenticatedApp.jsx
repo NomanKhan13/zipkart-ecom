@@ -23,7 +23,7 @@ import Checkout from './pages/Checkout/Checkout';
 const Layout = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
       <Footer />
     </>

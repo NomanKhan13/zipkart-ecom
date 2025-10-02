@@ -50,7 +50,7 @@ const Search = () => {
     return (
         <>
             <Navbar />
-            <div className="flex justify-center">
+            <div className="mt-16 flex justify-center">
                 <div className="w-full max-w-7xl">
                     <div className="mt-12 px-4 lg:px-8">
                         {/* Search Form */}

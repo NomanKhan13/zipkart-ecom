@@ -4,36 +4,29 @@ import { COLLECTION_STORE } from '../../utils/CONSTANTS';
 
 const ShopByCollection = () => {
   return (
-    <div className="flex justify-center">
-      <div className="w-full max-w-7xl px-4 md:px-8 py-20">
-        {/* Section Heading */}
+    <section className="bg-white">
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-20">
         <div className="flex flex-col items-center text-center mb-12">
           <Typography
             variant="h2"
             weight="font-semibold"
-            color="text-zinc-900"
+            className="text-3xl md:text-4xl text-[#272343]"
           >
             Shop by Collection
           </Typography>
-          <p className="text-zinc-600 mt-2 max-w-2xl">
+          <p className="text-zinc-600 mt-3 max-w-2xl text-base sm:text-lg">
             Each season, we collaborate with world-class designers to create
             a collection inspired by the natural world.
           </p>
         </div>
 
-        {/* Collection Grid */}
-        <div className="flex flex-col items-center lg:flex-row gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {COLLECTION_STORE.map((collection) => (
-            <div
-              key={collection.route}
-              className="flex-1 cursor-pointer flex flex-col gap-2 hover:scale-[0.97] transition-transform w-full sm:w-4/6 lg:w-auto"
-            >
-              <CollectionCard collection={collection} />
-            </div>
+            <CollectionCard key={collection.route} collection={collection} />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

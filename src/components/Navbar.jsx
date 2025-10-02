@@ -24,117 +24,82 @@ const Navbar = () => {
   };
 
   return (
-    <header className="relative">
-      {/* --- Top Utility Bar --- */}
-      <div className="bg-gradient-to-r from-[#2e3b4e] to-[#0d1b26]">
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-2 flex items-center justify-between text-white text-sm">
-          {/* Currency Selector */}
-          <select
-            name="currency"
-            id="currency"
-            defaultValue={currency}
-            className="bg-transparent font-medium rounded-md border border-white/30 px-2 py-1 focus:outline-none focus:ring-1 focus:ring-white"
-            onChange={(e) => handleCurrencyChange(e.target.value)}
+    <header className="absolute top-0 left-0 w-full z-20">
+      <nav className="w-full max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between 
+        bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl shadow-md mt-4">
+        
+        {/* Mobile Menu + Search */}
+        <div className="flex lg:hidden items-center gap-2">
+          <button
+            onClick={() => setOpenMobileMenu(true)}
+            className="p-2 rounded-lg hover:bg-zinc-100 transition"
           >
-            <option value="₹" className="text-zinc-800">INR</option>
-            <option value="CA$" className="text-zinc-800">CAD</option>
-            <option value="€" className="text-zinc-800">EUR</option>
-            <option value="$" className="text-zinc-800">USD</option>
-          </select>
-
-          {/* User Greeting / Auth Links */}
-          <div className="flex items-center gap-4">
-            {user?.displayName ? (
-              <p className="font-medium">
-                Welcome, <span className="font-semibold">{user.displayName}</span>
-              </p>
-            ) : (
-              <>
-                <Link to="/sign-in" className="hover:underline">Sign in</Link>
-                <Link to="/sign-up" className="hover:underline">Create account</Link>
-              </>
-            )}
-          </div>
+            <Menu />
+          </button>
+          <Link to="/search" className="p-2 rounded-lg hover:bg-zinc-100 transition">
+            <Search />
+          </Link>
         </div>
-      </div>
 
-      {/* --- Main Navbar --- */}
-      <nav className="bg-white border-b border-zinc-200">
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
-          {/* Mobile Menu + Search */}
-          <div className="flex lg:hidden items-center gap-2">
-            <button
-              onClick={() => setOpenMobileMenu(true)}
-              className="p-2 rounded-lg hover:bg-zinc-100"
-            >
-              <Menu />
-            </button>
-            <Link to="/search" className="p-2 rounded-lg hover:bg-zinc-100">
-              <Search />
-            </Link>
-          </div>
+        {/* Logo */}
+        <Link to="/store" className="text-2xl font-bold text-[#272343] hover:opacity-90 transition">
+          <Logo size="text-2xl lg:text-3xl" />
+        </Link>
 
-          {/* Logo */}
-          <Link to="/store" className="text-2xl font-bold text-accent">
-            <Logo size="text-2xl lg:text-3xl" />
+        {/* Nav Links (Desktop) */}
+        <ul className="hidden lg:flex gap-8 font-medium text-[#2d334a]">
+          <li><Link className="hover:text-[#272343] transition" to="/collection/fashion">Fashion</Link></li>
+          <li><Link className="hover:text-[#272343] transition" to="/collection/electronics">Electronics</Link></li>
+          <li><Link className="hover:text-[#272343] transition" to="/collection/house-holds">Households</Link></li>
+          <li><Link className="hover:text-[#272343] transition" to="/collection/personal-care">Personal Care</Link></li>
+        </ul>
+
+        {/* Right Actions */}
+        <div className="flex items-center gap-3">
+          {/* Search (Desktop) */}
+          <Link to="/search" className="hidden lg:flex p-2 rounded-full hover:bg-zinc-100 transition">
+            <Search />
           </Link>
 
-          {/* Nav Links (Desktop) */}
-          <ul className="hidden lg:flex gap-6 font-medium text-zinc-700">
-            <li><Link className="hover:text-primary" to="/collection/fashion">Fashion</Link></li>
-            <li><Link className="hover:text-primary" to="/collection/electronics">Electronics</Link></li>
-            <li><Link className="hover:text-primary" to="/collection/house-holds">Households</Link></li>
-            <li><Link className="hover:text-primary" to="/collection/personal-care">Personal Care</Link></li>
-          </ul>
+          {/* Profile */}
+          {user && (
+            <div className="relative">
+              <button
+                className="p-2 rounded-full hover:bg-zinc-100 transition"
+                onClick={() => setIsModalOpen((prev) => !prev)}
+              >
+                <UserRound />
+              </button>
+              {isModalOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-10">
+                  <button
+                    onClick={handleLogOut}
+                    className="flex items-center gap-2 w-full px-3 py-2 text-left text-sm hover:bg-zinc-100"
+                  >
+                    <LogOut size={16} />
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
 
-          {/* Right Actions */}
-          <div className="flex items-center gap-3">
-            {/* Search (Desktop) */}
-            <Link to="/search" className="hidden lg:flex p-2 rounded-full hover:bg-zinc-100">
-              <Search />
-            </Link>
-
-            {/* Profile */}
-            {user && (
-              <div className="relative">
-                <button
-                  className="p-2 rounded-full hover:bg-zinc-100"
-                  onClick={() => setIsModalOpen((prev) => !prev)}
-                >
-                  <UserRound />
-                </button>
-                {isModalOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-10">
-                    <button
-                      onClick={handleLogOut}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-left text-sm hover:bg-zinc-100"
-                    >
-                      <LogOut size={16} />
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Cart */}
-            <Link
-              to="/cart"
-              className="p-2 rounded-full hover:bg-zinc-100 relative"
-            >
-              <ShoppingCart />
-              {/* Example badge */}
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">
-                2
-              </span>
-            </Link>
-          </div>
+          {/* Cart */}
+          <Link
+            to="/cart"
+            className="p-2 rounded-full hover:bg-zinc-100 transition relative"
+          >
+            <ShoppingCart />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 shadow">
+              2
+            </span>
+          </Link>
         </div>
       </nav>
 
       {/* Mobile Menu Drawer */}
       {openMobileMenu && (
-        <div className="fixed inset-0 bg-black/40 z-20">
+        <div className="fixed inset-0 bg-black/40 z-30">
           <div className="w-64 bg-white h-full shadow-lg p-4">
             <MobileMenu setOpenMobileMenu={setOpenMobileMenu} />
           </div>

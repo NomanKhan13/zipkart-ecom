@@ -10,8 +10,8 @@ const StoreFrontPage = () => {
     <>
       <Hero />
       <TopRated/>
-      <ShopByCategory />
       <ShopYourSpace />
+      <ShopByCategory />
       <ShopByCollection />
       <ShopYourLife />
     </>
