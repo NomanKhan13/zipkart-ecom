@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { CurrencyContext } from "../../contexts/CurrencyContext";
 import { Link } from "react-router-dom";
-import Typography from "../../components/Typography";
 
 const ProductCard = ({ product }) => {
   const { currency, converter } = useContext(CurrencyContext);
 
   return (
-    <Link to={`/products/${product.id}`}>
+    <Link key={product.id} to={`/products/${product.id}`}>
       
       <div className="group cursor-pointer rounded-2xl bg-white border border-zinc-200 shadow-md transition-all duration-300 flex flex-col">
         <div className="h-60 sm:h-72 w-full overflow-hidden rounded-t-2xl bg-zinc-50">

@@ -1,14 +1,15 @@
-import { LogOut, Menu, Search, ShoppingCart, UserRound } from "lucide-react";
+import { LogIn, LogOut, Menu, Search, ShoppingCart, UserRound } from "lucide-react";
 import Logo from "./Logo";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CurrencyContext } from "../contexts/CurrencyContext";
 import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
     <header className="absolute top-0 left-0 w-full z-20">
       <nav className="w-full max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between 
         bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl shadow-md mt-4">
-        
+
         {/* Mobile Menu + Search */}
         <div className="flex lg:hidden items-center gap-2">
           <button
@@ -61,28 +62,31 @@ const Navbar = () => {
             <Search />
           </Link>
 
+         
+
+
           {/* Profile */}
-          {user && (
-            <div className="relative">
-              <button
-                className="p-2 rounded-full hover:bg-zinc-100 transition"
-                onClick={() => setIsModalOpen((prev) => !prev)}
-              >
-                <UserRound />
-              </button>
-              {isModalOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-10">
-                  <button
-                    onClick={handleLogOut}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-left text-sm hover:bg-zinc-100"
-                  >
-                    <LogOut size={16} />
-                    Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+          <div className="relative">
+            <button
+              className="p-2 rounded-full hover:bg-zinc-100 transition"
+              onClick={() => setIsModalOpen((prev) => !prev)}
+            >
+              <UserRound />
+            </button>
+            {isModalOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-10">
+                <button
+                  onClick={user ? handleLogOut : navigate("/sign-in")}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-left text-sm hover:bg-zinc-100"
+                >
+                  {user ? <LogOut size={16} /> : <LogIn />}
+                  
+                  <span>{user ? "Sign Out" : "Sign in"}</span>
+                </button>
+              </div>
+            )}
+          </div>
+
 
           {/* Cart */}
           <Link

@@ -30,9 +30,9 @@ const TopRated = () => {
 
         <div className="flex gap-6 overflow-x-auto scrollbar-hidden pb-4">
           {topProds.map((product) => (
-            <Link key={product.id} to={`/products/${product.id}`} className="min-w-80">
+            // <Link key={product.id} to={`/products/${product.id}`} className="min-w-80">
               <ProductCard product={product} />
-            </Link>
+            // </Link>
           ))}
         </div>
       </div>
